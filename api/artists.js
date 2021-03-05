@@ -1,7 +1,7 @@
 const express = require('express');
 const artistsRouter = express.Router();
 const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database(process.env.TEST_DATABASE || './db.sqlite');
+const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
 
 artistsRouter.param('artistId', (req, res, next, artistId) => {
     db.get(`SELECT * FROM Artist WHERE id = $id`, {
@@ -15,14 +15,13 @@ artistsRouter.param('artistId', (req, res, next, artistId) => {
         } else {
             res.sendStatus(404);
         }
-    })
+    });
 });
 
 artistsRouter.get('/', (req, res, next) => {
     db.all(`SELECT * FROM Artist WHERE is_currently_employed = 1`, (err, artists) => {
         if(err){
             next(err);
-            //res.sendStatus(500);
         } else {
             res.status(200).json({artists: artists});
         }

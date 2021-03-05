@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('errorhandler');
-const sqlite3 = require('sqlite3');
+//const sqlite3 = require('sqlite3');
 const cors = require('cors');
 const apiRouter = require('./api/api');
 
