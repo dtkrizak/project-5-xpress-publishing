@@ -88,10 +88,10 @@ seriesRouter.put('/:seriesId', (req, res, next) => {
 });
 
 seriesRouter.delete('/:seriesId', (req, res, next) => {
-    db.all(`SELECT * FROM Issue WHERE series_id = $series_id`, { $series_id: req.params.seriesId }, (err, rows) => {
+    db.get(`SELECT * FROM Issue WHERE series_id = $series_id`, { $series_id: req.params.seriesId }, (err, row) => {
         if (err) {
             next(err);
-        } else if (rows) {
+        } else if (row) {
             res.sendStatus(400);
             //Sends response if issues exist for the series
         } else {
