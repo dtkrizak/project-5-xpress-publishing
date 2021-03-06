@@ -6,7 +6,6 @@ const issuesRouter = require('./issues');
 
 seriesRouter.use('/:seriesId/issues', issuesRouter);
 
-
 seriesRouter.param('seriesId', (req, res, next, seriesId) => {
     db.get(`SELECT * FROM Series WHERE id = ${seriesId}`, (err, row) => {
         if (err) {
@@ -53,7 +52,7 @@ seriesRouter.post('/', (req, res, next) => {
         } else {
             db.get(`SELECT * FROM Series WHERE id = ${this.lastID}`, (err, row) => {
                 res.status(201).json({series: row});
-            })
+            });
         }
     });
 });
